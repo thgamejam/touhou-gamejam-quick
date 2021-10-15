@@ -2,7 +2,6 @@ package server
 
 import (
     downloadV1 "download/api/download/v1"
-    helloV1 "download/api/helloworld/v1"
     "download/internal/conf"
     "download/internal/service"
     "github.com/go-kratos/kratos/v2/log"
@@ -12,7 +11,6 @@ import (
 
 // NewHTTPServer new a HTTP server.
 func NewHTTPServer(c *conf.Server,
-    greeter *service.GreeterService,
     download *service.DownloadService,
     logger log.Logger) *http.Server {
 
@@ -31,7 +29,6 @@ func NewHTTPServer(c *conf.Server,
         opts = append(opts, http.Timeout(c.Http.Timeout.AsDuration()))
     }
     srv := http.NewServer(opts...)
-    helloV1.RegisterGreeterHTTPServer(srv, greeter)
     downloadV1.RegisterDownloadHTTPServer(srv, download)
 
     return srv

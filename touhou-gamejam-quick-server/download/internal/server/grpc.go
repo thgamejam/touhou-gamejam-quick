@@ -2,7 +2,6 @@ package server
 
 import (
     downloadV1 "download/api/download/v1"
-    helloV1 "download/api/helloworld/v1"
     "download/internal/conf"
     "download/internal/service"
     "github.com/go-kratos/kratos/v2/log"
@@ -12,7 +11,6 @@ import (
 
 // NewGRPCServer new a gRPC server.
 func NewGRPCServer(c *conf.Server,
-    greeter *service.GreeterService,
     download *service.DownloadService,
     logger log.Logger) *grpc.Server {
 
@@ -31,7 +29,6 @@ func NewGRPCServer(c *conf.Server,
         opts = append(opts, grpc.Timeout(c.Grpc.Timeout.AsDuration()))
     }
     srv := grpc.NewServer(opts...)
-    helloV1.RegisterGreeterServer(srv, greeter)
     downloadV1.RegisterDownloadServer(srv, download)
 
     return srv

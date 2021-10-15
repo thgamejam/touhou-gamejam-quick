@@ -10,23 +10,23 @@ import (
 )
 
 // ProviderSet is data providers.
-var ProviderSet = wire.NewSet(NewData, NewMySQL, NewRedis, NewGreeterRepo)
+var ProviderSet = wire.NewSet(NewData, NewMySQL, NewRedis)
 
 // Data .
 type Data struct {
     // 封装的数据库客户端
-    sqlDB   *gorm.DB
-    redisDB *redis.Client
+    DataBase *gorm.DB
+    Cache    *redis.Client
 }
 
 // NewData .
-func NewData(c *conf.Data, db *gorm.DB, rdb *redis.Client, logger log.Logger) (*Data, func(), error) {
+func NewData(c *conf.Data, db *gorm.DB, red *redis.Client, logger log.Logger) (*Data, func(), error) {
     cleanup := func() {
         log.NewHelper(logger).Info("closing the data resources")
     }
     return &Data{
-        sqlDB:   db,
-        redisDB: rdb,
+        DataBase: db,
+        Cache:    red,
     }, cleanup, nil
 }
 
@@ -45,19 +45,14 @@ func NewRedis(c *conf.Data) (*redis.Client, error) {
 
 // NewMySQL 初始化数据库
 func NewMySQL(c *conf.Data, logger log.Logger) (*gorm.DB, error) {
-    //logInstance := log.NewHelper(logger)
-
     db, err := gorm.Open(
         mysql.Open(c.Database.Dsn),
         &gorm.Config{
-            //Logger: logInstance,
+            //Logger: , // TODO 绑定log 未完成
         })
     if err != nil {
         return nil, err
     }
-
-    // TODO: 绑定log 未完成
-    // sqlDB.Logger
 
     selDb, err := db.DB()
     if err != nil {
