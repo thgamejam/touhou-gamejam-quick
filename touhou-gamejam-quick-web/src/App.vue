@@ -14,13 +14,14 @@
             </el-col>
             <el-col :span="12">
               <div class="grid-content bg-purple-light">
-
-                这是一段文字这是一段文字
+                <br>
+                这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字这这是一段文字这是一段文字这一段文字这这是一段文字这是一段文字这
               </div>
             </el-col>
             <el-col :span="4">
               <div class="grid-content bg-purple">
-                3
+                <el-button class="button" type="primary" plain>download</el-button>
+                <el-button class="button" type="success" plain>des</el-button>
               </div>
             </el-col>
           </el-row>
@@ -52,9 +53,9 @@ export default {
   background-color: #e9eef3;
   color: var(--el-text-color-primary);
   text-align: center;
-  line-height: 160px;
   width: 80%;
   margin: 0 auto;
+  height: 100%;
 }
 
 .box-img{
@@ -72,8 +73,14 @@ export default {
 .bg-purple-light {
   background: #e5e9f2;
 }
+.button{
+  height: 50%;
+  width: 100%;
+  float: right;
+}
 .grid-content {
   text-align: justify;
+  width: 100%;
   border-radius: 4px;
   height: 160px;
 }
