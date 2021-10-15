@@ -27,7 +27,7 @@ message Server {
 
 message Data {
   message Database {
-    string dsn = 1;
+    string source = 1;
     uint32 max_idle_conn = 2;
     uint32 max_open_conn = 3;
     google.protobuf.Duration conn_max_lifetime = 4;

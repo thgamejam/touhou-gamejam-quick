@@ -46,7 +46,7 @@ func NewRedis(c *conf.Data) (*redis.Client, error) {
 // NewMySQL 初始化数据库
 func NewMySQL(c *conf.Data, logger log.Logger) (*gorm.DB, error) {
     db, err := gorm.Open(
-        mysql.Open(c.Database.Dsn),
+        mysql.Open(c.Database.Source),
         &gorm.Config{
             //Logger: , // TODO 绑定log 未完成
         })

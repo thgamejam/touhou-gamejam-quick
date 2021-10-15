@@ -7,9 +7,13 @@ server:
     timeout: 1s
 data:
   database:
-    driver: mysql
-    source: root:root@tcp(127.0.0.1:3306)/test
+    source: root:123456@tcp(192.168.30.128:3306)/touhou_gamejam?charset=utf8mb4&parseTime=True&loc=Local
+    max_idle_conn: 50
+    max_open_conn: 100
+    conn_max_lifetime: 30s
   redis:
-    addr: 127.0.0.1:6379
+    network: tcp
+    addr: 192.168.30.128:6379
+    password: "123456"
     read_timeout: 0.2s
     write_timeout: 0.2s
