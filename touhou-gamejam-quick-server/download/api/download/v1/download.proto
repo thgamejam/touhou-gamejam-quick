@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package api.download.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "download/api/download/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.download.v1";
+
+service Download {
+  rpc GetDownloadURL (GetDownloadRequest) returns (GetDownloadReply) {
+    option (google.api.http) = {
+      get: "/download/{key}"
+    };
+  }
+}
+
+message GetDownloadRequest {
+  string key = 1; // 文件唯一标识符，SHA256
+  string location = 2; // 服务器组地点
+}
+
+message GetDownloadReply {
+  string url = 1;
+}
