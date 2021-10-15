@@ -7,7 +7,9 @@
 package main
 
 import (
+	"download/internal/biz"
 	"download/internal/conf"
+	"download/internal/data"
 	"download/internal/server"
 	"download/internal/service"
 	"github.com/go-kratos/kratos/v2"
@@ -17,11 +19,26 @@ import (
 // Injectors from wire.go:
 
 // initApp init kratos application.
-func initApp(confServer *conf.Server, data *conf.Data, logger log.Logger) (*kratos.App, func(), error) {
-	downloadService := service.NewDownloadService()
+func initApp(confServer *conf.Server, confData *conf.Data, logger log.Logger) (*kratos.App, func(), error) {
+	db, err := data.NewMySQL(confData, logger)
+	if err != nil {
+		return nil, nil, err
+	}
+	client, err := data.NewRedis(confData)
+	if err != nil {
+		return nil, nil, err
+	}
+	dataData, cleanup, err := data.NewData(confData, db, client, logger)
+	if err != nil {
+		return nil, nil, err
+	}
+	downloadRepo := data.NewDownloadRepo(dataData, logger)
+	downloadUseCase := biz.NewDownloadUseCase(downloadRepo, logger)
+	downloadService := service.NewDownloadService(downloadUseCase, logger)
 	httpServer := server.NewHTTPServer(confServer, downloadService, logger)
 	grpcServer := server.NewGRPCServer(confServer, downloadService, logger)
 	app := newApp(logger, httpServer, grpcServer)
 	return app, func() {
+		cleanup()
 	}, nil
 }
