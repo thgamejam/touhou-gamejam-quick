@@ -1,0 +1,90 @@
+syntax = "proto3";
+
+package touhou.api.game.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "download/api/game/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.game.v1";
+
+service Game {
+	rpc CreateGame (CreateGameRequest) returns (CreateGameReply) {
+		option (google.api.http) = {
+			put: "/api/v1/game"
+			body: "body"
+		};
+	}
+
+	rpc UpdateGame (UpdateGameRequest) returns (UpdateGameReply) {
+		option (google.api.http) = {
+			put: "/api/v1/game/{id}"
+			body: "body"
+		};
+	}
+
+	rpc DeleteGame (DeleteGameRequest) returns (DeleteGameReply) {
+		option (google.api.http).delete = "/api/v1/game/{id}";
+	}
+
+	rpc GetGame (GetGameRequest) returns (GetGameReply) {
+		option (google.api.http).get = "/api/v1/game/{id}";
+	}
+
+	rpc ListGame (ListGameRequest) returns (ListGameReply) {
+		option (google.api.http).get = "/api/v1/game/list/{page}";
+	}
+}
+
+message Body {
+	string name = 1;
+	uint32 author_id = 2; 				// 作者id
+	string introduce = 3; 				// 简介
+	string uuid = 4;							// 下载文件uuid
+	repeated string tag = 5; 			// 标签
+	repeated string picture = 6; 	// 图片集的uuid
+}
+
+message CreateGameRequest {
+	Body body = 1;
+}
+message CreateGameReply {
+	uint32 id = 1;
+}
+
+message UpdateGameRequest {
+	uint32 id = 1;
+	Body body = 2;
+}
+message UpdateGameReply {}
+
+message DeleteGameRequest {
+	uint32 id = 1;
+}
+message DeleteGameReply {}
+
+message GetGameRequest {
+	uint32 id = 1; // game id
+}
+message GetGameReply {
+	uint32 id = 1;
+	string name = 2;
+	uint32 author_id = 3; 				// 作者id
+	string introduce = 4; 				// 简介
+	string uuid = 5;							// 下载文件uuid
+	repeated string tag = 6; 			// 标签
+	repeated string picture = 7; 	// 图片集的uuid
+}
+
+message ListGameRequest {
+	uint32 page = 1; // 页码
+}
+message ListGameReply {
+	// game 卡片数据集
+	message GameCard {
+		uint32 id = 1;
+		string name = 2;
+		string picture = 3; 	// 缩略图的uuid
+	}
+	repeated GameCard list = 1;
+}
