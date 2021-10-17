@@ -20,7 +20,7 @@
       </el-card>
     </el-main>
     <el-aside width="30%">
-
+      
     </el-aside>
   </el-container>
 </template>
@@ -35,7 +35,10 @@ export default {
 </script>
 
 <style>
-
+.affix-container{
+  height: 10%;
+  width: 100%;
+}
 .card-img{
   height: 30%;
   width: 100%;
