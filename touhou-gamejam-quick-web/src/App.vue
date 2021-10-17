@@ -36,7 +36,7 @@
             <el-divider></el-divider>
             <span>类型:{{game_tag}}</span>
             <el-divider></el-divider>
-            <el-button type="primary" round>Download</el-button>
+            <el-button type="primary" round><el-link type="warning" :underline="false" :href=game_url target="_blank">DownLoad</el-link></el-button>
           </div>
         </el-affix>
       </div>
@@ -51,6 +51,7 @@ export default {
       name:"游戏名字",
       author_name:"我是作者",
       game_tag:"rpg,stg",
+      game_url:"https://www.baidu.com/",
       game_des:"这是一串很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的介绍",
       author_img:"https://img2.baidu.com/it/u=3043039063,2684560819&fm=26&fmt=auto",
       img:[
