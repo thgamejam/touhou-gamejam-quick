@@ -20,7 +20,23 @@
       </el-card>
     </el-main>
     <el-aside width="30%">
-      
+      <div class="affix-container">
+        <el-affix target=".affix-container" :offset="80">
+          <div class="des">
+            <el-avatar
+                :size="100"
+                src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+            ></el-avatar>
+            <el-divider></el-divider>
+            <span>描述:</span>
+            <el-divider></el-divider>
+            <span>作者:</span>
+            <el-divider></el-divider>
+            <span>类型:</span>
+            <el-divider></el-divider>
+          </div>
+        </el-affix>
+      </div>
     </el-aside>
   </el-container>
 </template>
@@ -35,8 +51,14 @@ export default {
 </script>
 
 <style>
+.des{
+  padding-top: 30px;
+  line-height: 0;
+  width: 100%;
+  height: 50%;
+}
 .affix-container{
-  height: 10%;
+  height: 100%;
   width: 100%;
 }
 .card-img{
