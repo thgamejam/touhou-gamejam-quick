@@ -1,21 +1,28 @@
 <template>
-  <el-header>标题</el-header>
+  <el-header>
+  </el-header>
   <el-container>
     <el-main >
       <el-card class="box-card main">
         <!--头部-->
         <template #header>
           <div class="card-header">
-            <span>名字</span>
+            <span>{{ name }}</span>
           </div>
         </template>
         <!--走马灯-->
         <div class="card-img">
           <el-carousel trigger="click" height="350px">
-            <el-carousel-item v-for="item in 1" :key="item">
-              <h3 class="small">{{ item }}</h3>
+            <el-carousel-item v-for="item in img" :key="item">
+              <img class="affix-container" :src=item>
             </el-carousel-item>
           </el-carousel>
+        </div>
+        <div class="text-des">
+          <h2>简介:</h2>
+          <h3>
+            {{game_des}}
+          </h3>
         </div>
       </el-card>
     </el-main>
@@ -23,17 +30,13 @@
       <div class="affix-container">
         <el-affix target=".affix-container" :offset="80">
           <div class="des">
-            <el-avatar
-                :size="100"
-                src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-            ></el-avatar>
+            <el-avatar :v-model="author_img" :size="100" :src=author_img></el-avatar>
             <el-divider></el-divider>
-            <span>描述:</span>
+            <span>作者:{{author_name}}</span>
             <el-divider></el-divider>
-            <span>作者:</span>
+            <span>类型:{{game_tag}}</span>
             <el-divider></el-divider>
-            <span>类型:</span>
-            <el-divider></el-divider>
+            <el-button type="primary" round>Download</el-button>
           </div>
         </el-affix>
       </div>
@@ -43,6 +46,18 @@
 
 <script>
 export default {
+  data(){
+    return{
+      name:"游戏名字",
+      author_name:"我是作者",
+      game_tag:"rpg,stg",
+      game_des:"这是一串很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的介绍",
+      author_img:"https://img2.baidu.com/it/u=3043039063,2684560819&fm=26&fmt=auto",
+      img:[
+        "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+      ]
+    }
+  },
   name: 'App',
   components: {
   },
@@ -51,6 +66,12 @@ export default {
 </script>
 
 <style>
+.text-des{
+  line-height: 25px;
+  text-align: left;
+  height: 30%;
+  width: 100%;
+}
 .des{
   padding-top: 30px;
   line-height: 0;
@@ -62,7 +83,7 @@ export default {
   width: 100%;
 }
 .card-img{
-  height: 30%;
+  height: 370px;
   width: 100%;
 }
 .box-card {
@@ -76,7 +97,7 @@ export default {
 }
 .main{
   width: 100%;
-  height: 1000px;
+  height: 700px;
 }
 .el-container{
   margin: 0 auto;
@@ -108,10 +129,8 @@ export default {
   height: 10%;
 }
 .el-card__body{
-  height: 85%;
+  height: 70%;
 }
-
-
 
 
 
