@@ -28,7 +28,11 @@ func initApp(confServer *conf.Server, confData *conf.Data, logger log.Logger) (*
 	if err != nil {
 		return nil, nil, err
 	}
-	dataData, cleanup, err := data.NewData(confData, db, client, logger)
+	objectStorage, err := data.NewObjectStorage(confData)
+	if err != nil {
+		return nil, nil, err
+	}
+	dataData, cleanup, err := data.NewData(confData, db, client, objectStorage, logger)
 	if err != nil {
 		return nil, nil, err
 	}
