@@ -44,6 +44,8 @@ message Data {
     string access_key = 2;
     string secret_key = 3;
     string bucket = 4;
+    google.protobuf.Duration small_file_expiration_time = 5;
+    google.protobuf.Duration large_file_expiration_time = 6;
   }
   Database data_base = 1;
   Redis redis = 2;

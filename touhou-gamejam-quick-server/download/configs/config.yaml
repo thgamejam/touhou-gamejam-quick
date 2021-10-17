@@ -22,3 +22,5 @@ data:
     access_key: user
     secret_key: "1234567890"
     bucket: "test"
+    small_file_expiration_time: 5m
+    large_file_expiration_time: 15m
