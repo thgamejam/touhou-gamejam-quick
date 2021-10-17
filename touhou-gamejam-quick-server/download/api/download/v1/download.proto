@@ -17,8 +17,8 @@ service Download {
 }
 
 message GetDownloadRequest {
-  string key = 1; // 文件唯一标识符，SHA256
-  string location = 2; // 服务器组地点
+  string key = 1;       // 文件路径
+  string location = 2;  // 服务器组地点
 }
 
 message GetDownloadReply {

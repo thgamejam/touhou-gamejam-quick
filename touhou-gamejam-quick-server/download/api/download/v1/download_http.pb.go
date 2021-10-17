@@ -35,7 +35,7 @@ func _Download_GetDownloadURL0_HTTP_Handler(srv DownloadHTTPServer) func(ctx htt
 		if err := ctx.BindVars(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/api.download.v1.Download/GetDownloadURL")
+		http.SetOperation(ctx, "/api.download.v1.Download/GetGame")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.GetDownloadURL(ctx, req.(*GetDownloadRequest))
 		})
@@ -64,7 +64,7 @@ func (c *DownloadHTTPClientImpl) GetDownloadURL(ctx context.Context, in *GetDown
 	var out GetDownloadReply
 	pattern := "/download/{key}"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.download.v1.Download/GetDownloadURL"))
+	opts = append(opts, http.Operation("/api.download.v1.Download/GetGame"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {

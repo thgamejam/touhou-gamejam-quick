@@ -170,8 +170,8 @@ var file_api_download_v1_download_proto_goTypes = []interface{}{
 	(*GetDownloadReply)(nil),   // 1: api.download.v1.GetDownloadReply
 }
 var file_api_download_v1_download_proto_depIdxs = []int32{
-	0, // 0: api.download.v1.Download.GetDownloadURL:input_type -> api.download.v1.GetDownloadRequest
-	1, // 1: api.download.v1.Download.GetDownloadURL:output_type -> api.download.v1.GetDownloadReply
+	0, // 0: api.download.v1.Download.GetGame:input_type -> api.download.v1.GetDownloadRequest
+	1, // 1: api.download.v1.Download.GetGame:output_type -> api.download.v1.GetDownloadReply
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name

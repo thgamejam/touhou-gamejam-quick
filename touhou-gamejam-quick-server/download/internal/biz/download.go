@@ -8,13 +8,12 @@ import (
 
 type Download struct {
     gorm.Model
-    KEY      string `gorm:"unique; not null; size:256"`
-    Location string `gorm:"not null; type:char(16)"`
-    URL      string `gorm:"not null; type:varchar(512)"`
+    UUID   string `gorm:"unique; not null; type:char(16)"` // TODO UUID size not ✔
+    Region string `gorm:"not null; type:char(16)"`
 }
 
 type DownloadRepo interface {
-    GetDownloadURL(ctx context.Context, key, location string) (string, error)
+    GetGame(ctx context.Context, key, location string) (string, error)
 }
 
 type DownloadUseCase struct {
@@ -26,6 +25,6 @@ func NewDownloadUseCase(repo DownloadRepo, logger log.Logger) *DownloadUseCase {
     return &DownloadUseCase{repo: repo, log: log.NewHelper(logger)}
 }
 
-func (uc *DownloadUseCase) GetURL(ctx context.Context, key, location string) (string, error) {
-    return uc.repo.GetDownloadURL(ctx, key, location)
+func (uc *DownloadUseCase) GetURL(ctx context.Context, uuid, region string) (string, error) {
+    return uc.repo.GetGame(ctx, uuid, region)
 }

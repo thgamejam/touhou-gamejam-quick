@@ -7,18 +7,18 @@ server:
     timeout: 1s
 data:
   data_base:
-    source: root:123456@tcp(192.168.0.128:3306)/touhou_gamejam?charset=utf8mb4&parseTime=True&loc=Local
+    source: root:123456@tcp(test.io:3306)/touhou_gamejam?charset=utf8mb4&parseTime=True&loc=Local
     max_idle_conn: 50
     max_open_conn: 100
     conn_max_lifetime: 30s
   redis:
     network: tcp
-    addr: 192.168.0.128:6379
+    addr: test.io:6379
     password: "123456"
     read_timeout: 0.2s
     write_timeout: 0.2s
   object_storage:
-    url: http://192.168.0.128:9000
+    url: http://test.io:9000
     access_key: user
     secret_key: "1234567890"
     bucket: "test"

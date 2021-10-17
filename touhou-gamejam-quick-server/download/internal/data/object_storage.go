@@ -66,7 +66,7 @@ func NewObjectStorage(c *conf.Data) (*ObjectStorage, error) {
     return oss, nil
 }
 
-// GetObjectURL 获取文件对象的URL
+// GetObjectURL 获取文件对象的预签名URL
 // key: 对象路径
 // expirationTime: 过期时间
 func (o *ObjectStorage) GetObjectURL(ctx context.Context, key string, expirationTime time.Duration) (string, error) {

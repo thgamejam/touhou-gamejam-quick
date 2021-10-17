@@ -31,7 +31,7 @@ func NewDownloadClient(cc grpc.ClientConnInterface) DownloadClient {
 
 func (c *downloadClient) GetDownloadURL(ctx context.Context, in *GetDownloadRequest, opts ...grpc.CallOption) (*GetDownloadReply, error) {
 	out := new(GetDownloadReply)
-	err := c.cc.Invoke(ctx, "/api.download.v1.Download/GetDownloadURL", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/api.download.v1.Download/GetGame", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ type UnimplementedDownloadServer struct {
 }
 
 func (UnimplementedDownloadServer) GetDownloadURL(context.Context, *GetDownloadRequest) (*GetDownloadReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetDownloadURL not implemented")
+	return nil, status.Errorf(codes.Unimplemented, "method GetGame not implemented")
 }
 func (UnimplementedDownloadServer) mustEmbedUnimplementedDownloadServer() {}
 
@@ -76,7 +76,7 @@ func _Download_GetDownloadURL_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.download.v1.Download/GetDownloadURL",
+		FullMethod: "/api.download.v1.Download/GetGame",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DownloadServer).GetDownloadURL(ctx, req.(*GetDownloadRequest))
@@ -92,7 +92,7 @@ var Download_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*DownloadServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetDownloadURL",
+			MethodName: "GetGame",
 			Handler:    _Download_GetDownloadURL_Handler,
 		},
 	},
