@@ -1,6 +1,7 @@
 package data
 
 import (
+    "download/internal/biz"
     "download/internal/conf"
     "github.com/go-kratos/kratos/v2/log"
     "github.com/go-redis/redis/v8"
@@ -10,7 +11,7 @@ import (
 )
 
 // ProviderSet is data providers.
-var ProviderSet = wire.NewSet(NewData, NewMySQL, NewRedis, NewDownloadRepo)
+var ProviderSet = wire.NewSet(NewData, NewDataBase, NewCache, NewDownloadRepo)
 
 // Data .
 type Data struct {
@@ -30,8 +31,8 @@ func NewData(c *conf.Data, db *gorm.DB, red *redis.Client, logger log.Logger) (*
     }, cleanup, nil
 }
 
-// NewRedis 初始化缓存
-func NewRedis(c *conf.Data) (*redis.Client, error) {
+// NewCache 初始化缓存
+func NewCache(c *conf.Data) (*redis.Client, error) {
     rdb := redis.NewClient(&redis.Options{
         Network:      c.Redis.Network,
         Addr:         c.Redis.Addr,
@@ -43,8 +44,8 @@ func NewRedis(c *conf.Data) (*redis.Client, error) {
     return rdb, nil
 }
 
-// NewMySQL 初始化数据库
-func NewMySQL(c *conf.Data, logger log.Logger) (*gorm.DB, error) {
+// NewDataBase 初始化数据库
+func NewDataBase(c *conf.Data, logger log.Logger) (*gorm.DB, error) {
     db, err := gorm.Open(
         mysql.Open(c.Database.Source),
         &gorm.Config{
@@ -66,8 +67,7 @@ func NewMySQL(c *conf.Data, logger log.Logger) (*gorm.DB, error) {
     // 超时 time.Second * 30
     selDb.SetConnMaxLifetime(c.Database.ConnMaxLifetime.AsDuration())
 
-    //err = db.AutoMigrate(&model.User{})
-
+    err = DBAutoMigrate(db)
     if err != nil {
         return nil, err
     }
@@ -75,6 +75,12 @@ func NewMySQL(c *conf.Data, logger log.Logger) (*gorm.DB, error) {
     return db, nil
 }
 
-func SQLAutoMigrate() {
+// DBAutoMigrate .
+func DBAutoMigrate(db *gorm.DB) error {
+    err := db.AutoMigrate(&biz.Download{})
+    if err != nil {
+        return err
+    }
 
+    return nil
 }

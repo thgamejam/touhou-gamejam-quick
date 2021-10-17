@@ -20,11 +20,11 @@ import (
 
 // initApp init kratos application.
 func initApp(confServer *conf.Server, confData *conf.Data, logger log.Logger) (*kratos.App, func(), error) {
-	db, err := data.NewMySQL(confData, logger)
+	db, err := data.NewDataBase(confData, logger)
 	if err != nil {
 		return nil, nil, err
 	}
-	client, err := data.NewRedis(confData)
+	client, err := data.NewCache(confData)
 	if err != nil {
 		return nil, nil, err
 	}

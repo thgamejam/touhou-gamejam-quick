@@ -6,11 +6,11 @@
 package main
 
 import (
+    "download/internal/biz"
     "download/internal/conf"
+    "download/internal/data"
     "download/internal/server"
     "download/internal/service"
-    "download/internal/data"
-    "download/internal/biz"
     "github.com/go-kratos/kratos/v2"
     "github.com/go-kratos/kratos/v2/log"
     "github.com/google/wire"
@@ -23,6 +23,7 @@ func initApp(*conf.Server, *conf.Data, log.Logger) (*kratos.App, func(), error) 
         data.ProviderSet,
         biz.ProviderSet,
         service.ProviderSet,
+        data.DBAutoMigrate,
         newApp,
     ))
 }

@@ -9,8 +9,8 @@ import (
 type Download struct {
     gorm.Model
     KEY      string `gorm:"unique; not null; size:256"`
-    Location string
-    URL      string
+    Location string `gorm:"not null; type:char(16)"`
+    URL      string `gorm:"not null; type:varchar(512)"`
 }
 
 type DownloadRepo interface {
