@@ -23,7 +23,6 @@ func initApp(*conf.Server, *conf.Data, log.Logger) (*kratos.App, func(), error) 
         data.ProviderSet,
         biz.ProviderSet,
         service.ProviderSet,
-        data.DBAutoMigrate,
         newApp,
     ))
 }
