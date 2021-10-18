@@ -7,13 +7,13 @@
         <!--头部-->
         <template #header>
           <div class="card-header">
-            <span>{{ name }}</span>
+            <span>{{ obj.name }}</span>
           </div>
         </template>
         <!--走马灯-->
         <div class="card-img">
           <el-carousel trigger="click" height="350px">
-            <el-carousel-item v-for="item in img" :key="item">
+            <el-carousel-item v-for="item in obj.img" :key="item">
               <img class="affix-container" :src=item>
             </el-carousel-item>
           </el-carousel>
@@ -21,7 +21,7 @@
         <div class="text-des">
           <h2>简介:</h2>
           <h3>
-            {{game_des}}
+            {{obj.name}}
           </h3>
         </div>
       </el-card>
@@ -30,11 +30,11 @@
       <div class="affix-container">
         <el-affix target=".affix-container" :offset="80">
           <div class="des">
-            <el-avatar :v-model="author_img" :size="100" :src=author_img></el-avatar>
+            <el-avatar :v-model="author_obj.author_img" :size="100" :src=obj.author_img></el-avatar>
             <el-divider></el-divider>
-            <span>作者:{{author_name}}</span>
+            <span>作者:{{author_obj.author_name}}</span>
             <el-divider></el-divider>
-            <span>类型:{{game_tag}}</span>
+            <span>类型:{{obj.tag}}</span>
             <el-divider></el-divider>
             <el-card class="aside-card">
               <el-divider><i class="el-icon-star-on"></i>协议<i class="el-icon-star-on"></i></el-divider>
@@ -56,7 +56,7 @@
               </el-row>
               <hr>
               <el-button class="button" type="primary" round>
-                <el-link type="warning" :underline="false" :href=game_url target="_blank">
+                <el-link type="warning" :underline="false" :href=obj.download_id target="_blank">
                   DownLoad
                 </el-link>
               </el-button>
@@ -72,16 +72,22 @@
 export default {
   data(){
     return{
-      name:"游戏",
-      author_name:"舍僻阁",
-      game_tag:"rpg,stg",
-      game_des:"这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的简介",
-      game_url:"https://www.baidu.com/",
-      author_img:"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F96cc3eaca8df7cce99cd3b5a22843206dc522ec2.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1637070918&t=e9d5d7a77aca295eecd2b43a9543be7a",
-      img:[
-        "https://img1.baidu.com/it/u=1939001640,3189615103&fm=26&fmt=auto",
-        "https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20170822%2Ff908dec9bd9146e08f5396212d0a335b.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1637070918&t=ec55041f0d5f009cc62b8b887f5ebe17"
-      ]
+      obj:{
+        name:"游戏",
+        tag:"rpg,stg",
+        download_id:"",
+        author_id:"",
+        game_des:"这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的简介",
+        author_img:"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F96cc3eaca8df7cce99cd3b5a22843206dc522ec2.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1637070918&t=e9d5d7a77aca295eecd2b43a9543be7a",
+        img:[
+          "https://img1.baidu.com/it/u=1939001640,3189615103&fm=26&fmt=auto",
+          "https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20170822%2Ff908dec9bd9146e08f5396212d0a335b.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1637070918&t=ec55041f0d5f009cc62b8b887f5ebe17",
+        ],
+      },
+      author_obj:{
+        author_name:"舍僻阁",
+        author_img:"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F96cc3eaca8df7cce99cd3b5a22843206dc522ec2.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1637070918&t=e9d5d7a77aca295eecd2b43a9543be7a",
+      },
     }
   },
   name: 'App',
