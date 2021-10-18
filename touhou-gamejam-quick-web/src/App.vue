@@ -99,7 +99,6 @@ export default {
   color: green;
 }
 .aside-card{
-  line-height: 20px;
   text-align: left;
   width: 80%;
   margin: 0 10%;
