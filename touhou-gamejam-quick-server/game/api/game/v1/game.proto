@@ -36,25 +36,32 @@ service Game {
   }
 }
 
-message Body {
-  string name = 1;
-  uint32 author_id = 2; 		// 作者id
-  string description = 3; 	// 简介
-  string download_id = 4;		// 下载文件uuid
-  repeated string tags = 5; // 标签
-  repeated string imgs = 6; // 图片集的url
-}
-
 message CreateGameRequest {
-  Body body = 1;
+  message CreateBody {
+    string name = 1;
+    uint32 author_id = 2;     // 作者id
+    string description = 3;   // 简介
+//    repeated string tags = 4; // 标签
+//    repeated string imgs = 5; // 图片集的url
+  }
+  CreateBody body = 1;
 }
 message CreateGameReply {
   uint32 id = 1;
+  string download_id = 2;    // 下载文件uuid
 }
 
 message UpdateGameRequest {
+  message UpdateBody {
+    string name = 1;
+    uint32 author_id = 2;     // 作者id
+    string description = 3;   // 简介
+    string download_id = 4;   // 下载文件uuid
+    repeated string tags = 5; // 标签
+    repeated string imgs = 6; // 图片集的url
+  }
   uint32 id = 1;
-  Body body = 2;
+  UpdateBody body = 2;
 }
 message UpdateGameReply {}
 
@@ -68,9 +75,9 @@ message GetGameRequest {
 }
 message GetGameReply {
   string name = 1;
-  uint32 author_id = 2; 		// 作者id
-  string description = 3; 	// 简介
-  string download_id = 4;		// 下载文件uuid
+  uint32 author_id = 2;    // 作者id
+  string description = 3;  // 简介
+  string download_id = 4;    // 下载文件uuid
   repeated string tags = 5; // 标签
   repeated string imgs = 6; // 图片集的url
 }

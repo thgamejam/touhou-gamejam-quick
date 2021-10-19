@@ -2,6 +2,7 @@ package biz
 
 import (
     "context"
+    "game/internal/util/uuid"
     "github.com/go-kratos/kratos/v2/log"
     "gorm.io/gorm"
 )
@@ -10,10 +11,10 @@ import (
 type Game struct {
     gorm.Model
 
-    Name        string `gorm:"not null; type:varchar(32)"`
-    AuthorID    uint   `gorm:"index; not null"`             // 作者id
-    Description string `gorm:"not null; type:varchar(512)"` // 简介
-    DownloadID  string `gorm:"not null; type:binary(16)"`   // 下载文件uuid
+    Name        string          `gorm:"not null; type:varchar(32)"`
+    AuthorID    uint            `gorm:"index; not null"`             // 作者id
+    Description string          `gorm:"not null; type:varchar(512)"` // 简介
+    DownloadID  uuid.BinaryUUID `gorm:"not null; type:binary(16)"`   // 下载文件uuid
 }
 
 // GameTags 游戏标签模型
@@ -37,8 +38,8 @@ type GameExistTags struct {
 type GameExistImgs struct {
     gorm.Model
 
-    GameID uint   `gorm:"index; not null"`
-    ImgID  string `gorm:"not null; type:binary(16)"` // 介绍图片文件uuid
+    GameID uint            `gorm:"index; not null"`
+    ImgID  uuid.BinaryUUID `gorm:"not null; type:binary(16)"` // 介绍图片文件uuid
 }
 
 type GameRepo interface {
@@ -48,6 +49,8 @@ type GameRepo interface {
     GameTags(ctx context.Context, id uint) ([]string, error)
     // GameImgs 通过id获取游戏图片url
     GameImgs(ctx context.Context, id uint) ([]string, error)
+
+    CreateGame(ctx context.Context, name string, authorId uint, des string, dowId uuid.BinaryUUID) (*Game, error)
 }
 
 type GameUseCase struct {
@@ -69,4 +72,9 @@ func (uc *GameUseCase) GameTags(ctx context.Context, id uint) ([]string, error) 
 
 func (uc *GameUseCase) GameImgs(ctx context.Context, id uint) ([]string, error) {
     return uc.repo.GameImgs(ctx, id)
+}
+
+func (uc *GameUseCase) CreateGame(ctx context.Context,
+    name string, authorId uint, des string, dowId uuid.BinaryUUID) (*Game, error) {
+    return uc.repo.CreateGame(ctx, name, authorId, des, dowId)
 }
