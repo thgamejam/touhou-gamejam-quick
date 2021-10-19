@@ -35,7 +35,7 @@ func NewGameClient(cc grpc.ClientConnInterface) GameClient {
 
 func (c *gameClient) CreateGame(ctx context.Context, in *CreateGameRequest, opts ...grpc.CallOption) (*CreateGameReply, error) {
 	out := new(CreateGameReply)
-	err := c.cc.Invoke(ctx, "/api.game.v1.Game/CreateGame", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/touhou.api.game.v1.Game/CreateGame", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ func (c *gameClient) CreateGame(ctx context.Context, in *CreateGameRequest, opts
 
 func (c *gameClient) UpdateGame(ctx context.Context, in *UpdateGameRequest, opts ...grpc.CallOption) (*UpdateGameReply, error) {
 	out := new(UpdateGameReply)
-	err := c.cc.Invoke(ctx, "/api.game.v1.Game/UpdateGame", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/touhou.api.game.v1.Game/UpdateGame", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ func (c *gameClient) UpdateGame(ctx context.Context, in *UpdateGameRequest, opts
 
 func (c *gameClient) DeleteGame(ctx context.Context, in *DeleteGameRequest, opts ...grpc.CallOption) (*DeleteGameReply, error) {
 	out := new(DeleteGameReply)
-	err := c.cc.Invoke(ctx, "/api.game.v1.Game/DeleteGame", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/touhou.api.game.v1.Game/DeleteGame", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ func (c *gameClient) DeleteGame(ctx context.Context, in *DeleteGameRequest, opts
 
 func (c *gameClient) GetGame(ctx context.Context, in *GetGameRequest, opts ...grpc.CallOption) (*GetGameReply, error) {
 	out := new(GetGameReply)
-	err := c.cc.Invoke(ctx, "/api.game.v1.Game/GetGame", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/touhou.api.game.v1.Game/GetGame", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ func (c *gameClient) GetGame(ctx context.Context, in *GetGameRequest, opts ...gr
 
 func (c *gameClient) ListGame(ctx context.Context, in *ListGameRequest, opts ...grpc.CallOption) (*ListGameReply, error) {
 	out := new(ListGameReply)
-	err := c.cc.Invoke(ctx, "/api.game.v1.Game/ListGame", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/touhou.api.game.v1.Game/ListGame", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -132,7 +132,7 @@ func _Game_CreateGame_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.game.v1.Game/CreateGame",
+		FullMethod: "/touhou.api.game.v1.Game/CreateGame",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GameServer).CreateGame(ctx, req.(*CreateGameRequest))
@@ -150,7 +150,7 @@ func _Game_UpdateGame_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.game.v1.Game/UpdateGame",
+		FullMethod: "/touhou.api.game.v1.Game/UpdateGame",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GameServer).UpdateGame(ctx, req.(*UpdateGameRequest))
@@ -168,7 +168,7 @@ func _Game_DeleteGame_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.game.v1.Game/DeleteGame",
+		FullMethod: "/touhou.api.game.v1.Game/DeleteGame",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GameServer).DeleteGame(ctx, req.(*DeleteGameRequest))
@@ -186,7 +186,7 @@ func _Game_GetGame_Handler(srv interface{}, ctx context.Context, dec func(interf
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.game.v1.Game/GetGame",
+		FullMethod: "/touhou.api.game.v1.Game/GetGame",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GameServer).GetGame(ctx, req.(*GetGameRequest))
@@ -204,7 +204,7 @@ func _Game_ListGame_Handler(srv interface{}, ctx context.Context, dec func(inter
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.game.v1.Game/ListGame",
+		FullMethod: "/touhou.api.game.v1.Game/ListGame",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GameServer).ListGame(ctx, req.(*ListGameRequest))
@@ -216,7 +216,7 @@ func _Game_ListGame_Handler(srv interface{}, ctx context.Context, dec func(inter
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Game_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "api.game.v1.Game",
+	ServiceName: "touhou.api.game.v1.Game",
 	HandlerType: (*GameServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

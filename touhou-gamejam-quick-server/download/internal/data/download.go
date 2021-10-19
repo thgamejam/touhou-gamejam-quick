@@ -20,9 +20,9 @@ func NewDownloadRepo(data *Data, logger log.Logger) biz.DownloadRepo {
 }
 
 func (d *downloadRepo) GetGame(ctx context.Context, uuid, region string) (string, error) {
-    // 从数据库中查找是否存在对应的uuid内容
-    model := &biz.Download{}
-    d.data.DataBase.Where("uuid = ?", uuid).First(model)
+    //// 从数据库中查找是否存在对应的uuid内容
+    //model := &biz.Download{}
+    //d.data.DataBase.Where("uuid = ?", uuid).First(model)
 
     return "", nil
 }

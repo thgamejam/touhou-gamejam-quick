@@ -54,7 +54,7 @@ docker run --rm -p 8000:8000 -p 9000:9000 -v </path/to/your/configs>:/data/conf 
 ## Config 生成
 ```bash
 cd .\download\internal\conf
-protoc --go_out=. .\conf.proto
+protoc --go_out=./../../.. .\conf.proto
 ```
 
 ## Debug

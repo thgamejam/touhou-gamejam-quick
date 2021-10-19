@@ -7,11 +7,11 @@
 package main
 
 import (
-	"download/internal/biz"
-	"download/internal/conf"
-	"download/internal/data"
-	"download/internal/server"
-	"download/internal/service"
+	"game/internal/biz"
+	"game/internal/conf"
+	"game/internal/data"
+	"game/internal/server"
+	"game/internal/service"
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"
 )
@@ -36,11 +36,11 @@ func initApp(confServer *conf.Server, confData *conf.Data, logger log.Logger) (*
 	if err != nil {
 		return nil, nil, err
 	}
-	downloadRepo := data.NewDownloadRepo(dataData, logger)
-	downloadUseCase := biz.NewGameUseCase(downloadRepo, logger)
-	downloadService := service.NewDownloadService(downloadUseCase, logger)
-	httpServer := server.NewHTTPServer(confServer, downloadService, logger)
-	grpcServer := server.NewGRPCServer(confServer, downloadService, logger)
+	gameRepo := data.NewGameRepo(dataData, logger)
+	gameUseCase := biz.NewGameUseCase(gameRepo, logger)
+	gameService := service.NewGameService(gameUseCase, logger)
+	httpServer := server.NewHTTPServer(confServer, gameService, logger)
+	grpcServer := server.NewGRPCServer(confServer, gameService, logger)
 	app := newApp(logger, httpServer, grpcServer)
 	return app, func() {
 		cleanup()

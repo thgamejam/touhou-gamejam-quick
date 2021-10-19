@@ -1,6 +1,5 @@
 syntax = "proto3";
-
-package touhou.game.api;
+package kratos.api;
 
 option go_package = "game/internal/conf;conf";
 
@@ -40,6 +39,15 @@ message Data {
     google.protobuf.Duration read_timeout = 4;
     google.protobuf.Duration write_timeout = 5;
   }
+  message ObjectStorage {
+    string url = 1;
+    string access_key = 2;
+    string secret_key = 3;
+    string bucket = 4;
+    google.protobuf.Duration small_file_expiration_time = 5;
+    google.protobuf.Duration large_file_expiration_time = 6;
+  }
   Database data_base = 1;
   Redis redis = 2;
+  ObjectStorage object_storage = 3;
 }

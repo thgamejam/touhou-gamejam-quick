@@ -1,7 +1,7 @@
 package data
 
 import (
-    "download/internal/conf"
+    "game/internal/conf"
     "github.com/go-redis/redis/v8"
 )
 

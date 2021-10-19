@@ -1,8 +1,8 @@
 package data
 
 import (
-    "download/internal/biz"
-    "download/internal/conf"
+    "game/internal/biz"
+    "game/internal/conf"
     "github.com/go-kratos/kratos/v2/log"
     "gorm.io/driver/mysql"
     "gorm.io/gorm"
@@ -36,16 +36,22 @@ func NewDataBase(c *conf.Data, logger log.Logger) (*gorm.DB, error) {
         return nil, err
     }
 
+
+
     return db, nil
 }
 
 // DBAutoMigrate .
 func DBAutoMigrate(db *gorm.DB) error {
-    err := db.AutoMigrate(&biz.Game{})
+    err := db.AutoMigrate(
+        &biz.Game{},
+        &biz.GameTags{},
+        &biz.GameExistTags{},
+        &biz.GameExistImgs{},
+    )
     if err != nil {
         return err
     }
 
     return nil
 }
-

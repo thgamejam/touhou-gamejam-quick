@@ -40,7 +40,7 @@ func _Game_CreateGame0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) e
 		if err := ctx.Bind(&in.Body); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/api.game.v1.Game/CreateGame")
+		http.SetOperation(ctx, "/touhou.api.game.v1.Game/CreateGame")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.CreateGame(ctx, req.(*CreateGameRequest))
 		})
@@ -62,7 +62,7 @@ func _Game_UpdateGame0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) e
 		if err := ctx.BindVars(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/api.game.v1.Game/UpdateGame")
+		http.SetOperation(ctx, "/touhou.api.game.v1.Game/UpdateGame")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.UpdateGame(ctx, req.(*UpdateGameRequest))
 		})
@@ -84,7 +84,7 @@ func _Game_DeleteGame0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) e
 		if err := ctx.BindVars(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/api.game.v1.Game/DeleteGame")
+		http.SetOperation(ctx, "/touhou.api.game.v1.Game/DeleteGame")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.DeleteGame(ctx, req.(*DeleteGameRequest))
 		})
@@ -106,7 +106,7 @@ func _Game_GetGame0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) erro
 		if err := ctx.BindVars(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/api.game.v1.Game/GetGame")
+		http.SetOperation(ctx, "/touhou.api.game.v1.Game/GetGame")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.GetGame(ctx, req.(*GetGameRequest))
 		})
@@ -128,7 +128,7 @@ func _Game_ListGame0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) err
 		if err := ctx.BindVars(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/api.game.v1.Game/ListGame")
+		http.SetOperation(ctx, "/touhou.api.game.v1.Game/ListGame")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.ListGame(ctx, req.(*ListGameRequest))
 		})
@@ -161,7 +161,7 @@ func (c *GameHTTPClientImpl) CreateGame(ctx context.Context, in *CreateGameReque
 	var out CreateGameReply
 	pattern := "/api/v1/game"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation("/api.game.v1.Game/CreateGame"))
+	opts = append(opts, http.Operation("/touhou.api.game.v1.Game/CreateGame"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "PUT", path, in.Body, &out, opts...)
 	if err != nil {
@@ -174,7 +174,7 @@ func (c *GameHTTPClientImpl) DeleteGame(ctx context.Context, in *DeleteGameReque
 	var out DeleteGameReply
 	pattern := "/api/v1/game/{id}"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.game.v1.Game/DeleteGame"))
+	opts = append(opts, http.Operation("/touhou.api.game.v1.Game/DeleteGame"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
 	if err != nil {
@@ -187,7 +187,7 @@ func (c *GameHTTPClientImpl) GetGame(ctx context.Context, in *GetGameRequest, op
 	var out GetGameReply
 	pattern := "/api/v1/game/{id}"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.game.v1.Game/GetGame"))
+	opts = append(opts, http.Operation("/touhou.api.game.v1.Game/GetGame"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
@@ -200,7 +200,7 @@ func (c *GameHTTPClientImpl) ListGame(ctx context.Context, in *ListGameRequest, 
 	var out ListGameReply
 	pattern := "/api/v1/game/list/{page}"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/api.game.v1.Game/ListGame"))
+	opts = append(opts, http.Operation("/touhou.api.game.v1.Game/ListGame"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
@@ -213,7 +213,7 @@ func (c *GameHTTPClientImpl) UpdateGame(ctx context.Context, in *UpdateGameReque
 	var out UpdateGameReply
 	pattern := "/api/v1/game/{id}"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation("/api.game.v1.Game/UpdateGame"))
+	opts = append(opts, http.Operation("/touhou.api.game.v1.Game/UpdateGame"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "PUT", path, in.Body, &out, opts...)
 	if err != nil {
