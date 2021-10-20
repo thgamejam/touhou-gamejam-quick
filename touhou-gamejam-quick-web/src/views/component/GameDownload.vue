@@ -32,7 +32,7 @@
 
     <hr />
     
-    <el-button type="primary">Loading</el-button>
+    <el-button type="primary" style="width: 100%">Download</el-button>
 
   </el-card>
 </template>
