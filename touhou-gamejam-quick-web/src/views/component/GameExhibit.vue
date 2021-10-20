@@ -20,7 +20,7 @@
   </el-carousel>
 
   <p />
-  <div>
+  <div class="tag-text">
     <!-- 一条竖线 -->
     <table class="vertical-line tag-box">
       <tr>
@@ -34,9 +34,7 @@
     </div>
   </div>
 
-
-
-  <div>
+  <div style="float: none">
     <h3>
       {{ obj.description }}
     </h3>
@@ -100,6 +98,10 @@ export default {
 </script>
 
 <style>
+.tag-text{
+  width: 100%;
+  height: 100px;
+}
 .tag-box{
   float: left;
 }
