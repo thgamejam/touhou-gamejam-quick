@@ -3,7 +3,11 @@ package data
 import (
     "context"
     "game/internal/biz"
+    "github.com/aws/aws-sdk-go-v2/aws"
+    "github.com/aws/aws-sdk-go-v2/service/s3"
 )
+
+const keyHead = "game_imgs/"
 
 func (r *gameRepo) GetGame(ctx context.Context, id uint) (*biz.Game, error) {
     model := &biz.Game{}
@@ -28,7 +32,7 @@ func (r *gameRepo) GameTags(ctx context.Context, id uint) ([]string, error) {
 
     // 数据库获取标签的对应名字
     var tagsModels []biz.GameTags
-    err = r.data.DataBase.Find(&tagsModels, []int{1, 2, 3}).Error
+    err = r.data.DataBase.Find(&tagsModels, tagIdArray).Error
     if err != nil {
         return nil, err
     }
@@ -52,7 +56,25 @@ func (r *gameRepo) GameImgs(ctx context.Context, id uint) ([]string, error) {
         imgIdArray = append(imgIdArray, imgModel.ImgID.String())
     }
 
-    // TODO img uuid => img url ❌
+    // 获取url
+    psClient := s3.NewPresignClient(r.data.ObjectStorage.Client)
 
-    return imgIdArray, nil
+    imgURLArray := make([]string, 0, len(imgIdArray))
+    for _, imgId := range imgIdArray {
+        getInput := &s3.GetObjectInput{
+            Bucket: r.data.ObjectStorage.bucket,
+            Key:    aws.String(keyHead + imgId), // TODO 这里用了常量，后期需要修改为配置文件
+        }
+        req, err := psClient.PresignGetObject(context.TODO(), getInput,
+            func(options *s3.PresignOptions) {
+                options.Expires = r.data.ObjectStorage.smallFileExpirationTime
+            },
+        )
+        if err != nil {
+            continue
+        }
+        imgURLArray = append(imgURLArray, req.URL)
+    }
+
+    return imgURLArray, nil
 }
