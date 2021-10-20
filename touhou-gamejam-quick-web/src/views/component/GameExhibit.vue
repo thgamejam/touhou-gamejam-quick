@@ -20,27 +20,21 @@
   </el-carousel>
 
   <p />
-
-  <el-space wrap>
+  <div>
     <!-- 一条竖线 -->
-    <table class="vertical-line">
+    <table class="vertical-line tag-box">
       <tr>
         <td valign="top"></td>
       </tr>
     </table>
+    <font size="2"></font>
+    <div style="margin: 0 18px">标签</div>
+    <div class="tag-box" v-for="tag in obj.tags" :key="tag">
+      <el-tag style="margin: 10px">{{tag}}</el-tag>
+    </div>
+  </div>
 
-    <font size="2">游戏类型</font>
-    
-    <el-space wrap>
-      <!-- <div> -->
-      <el-link type="primary">RPG</el-link>
-      <el-link type="success">STG</el-link>
-      <el-link type="warning">RPG</el-link>
-      <el-link type="danger">RPG</el-link>
-      <el-link type="info">RPG</el-link>
-      <!-- </div> -->
-    </el-space>
-  </el-space>
+
 
   <div>
     <h3>
@@ -68,7 +62,7 @@ export default {
       obj: {
         name: "",
         description: "",
-        tags: [],
+        tags: ["冒险","动作","东方"],
         imgs: [],
       },
       carouselHeight: 100, // 走马灯高度
@@ -106,6 +100,9 @@ export default {
 </script>
 
 <style>
+.tag-box{
+  float: left;
+}
 .el-carousel__item h3 {
   color: #475669;
   font-size: 18px;
