@@ -35,7 +35,7 @@
             <el-divider></el-divider>
             <span>作者:{{authorObj.name}}</span>
             <el-divider></el-divider>
-            <span>类型:{{obj.tag}}</span>
+            <span>类型:{{obj.tags}}</span>
             <el-divider></el-divider>
             <el-card class="aside-card">
               <el-divider><i class="el-icon-star-on"></i>协议<i class="el-icon-star-on"></i></el-divider>
@@ -82,8 +82,8 @@ export default {
         authorId:"",
         description:"这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的简介",
         imgs:[
-          "https://img1.baidu.com/it/u=1939001640,3189615103&fm=26&fmt=auto",
-          "https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20170822%2Ff908dec9bd9146e08f5396212d0a335b.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1637070918&t=ec55041f0d5f009cc62b8b887f5ebe17",
+          // "https://img1.baidu.com/it/u=1939001640,3189615103&fm=26&fmt=auto",
+          // "https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20170822%2Ff908dec9bd9146e08f5396212d0a335b.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1637070918&t=ec55041f0d5f009cc62b8b887f5ebe17",
         ],
       },
       authorObj:{
