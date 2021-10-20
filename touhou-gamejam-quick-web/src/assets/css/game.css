@@ -1,0 +1,87 @@
+.el-icon-close {
+  color: red;
+}
+.el-icon-check {
+  color: green;
+}
+.aside-card {
+  text-align: left;
+  width: 80%;
+  margin: 0 10%;
+}
+.button {
+  width: 100%;
+  height: 35px;
+}
+
+.des {
+  padding-top: 30px;
+  line-height: 0;
+  width: 100%;
+  height: 50%;
+}
+.card-img {
+  height: 370px;
+  width: 100%;
+}
+.box-card {
+  width: 480px;
+}
+.card-header {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.main {
+  width: 100%;
+  height: 700px;
+}
+.el-container {
+  margin: 0 auto;
+  width: 70%;
+}
+.el-header {
+  background-color: #b3c0d1;
+  color: var(--el-text-color-primary);
+  text-align: center;
+  line-height: 60px;
+  margin: 0 auto;
+  width: 70%;
+}
+
+.el-aside {
+  background-color: #d3dce6;
+  color: var(--el-text-color-primary);
+  text-align: center;
+  line-height: 200px;
+}
+
+.el-main {
+  background-color: #e9eef3;
+  color: var(--el-text-color-primary);
+  text-align: left;
+}
+.el-card__header {
+  height: 10%;
+}
+.el-card__body {
+  height: 70%;
+}
+
+.el-carousel__item h3 {
+  color: #475669;
+  font-size: 14px;
+  opacity: 0.75;
+  line-height: 150px;
+  margin: 0;
+  text-align: center;
+}
+
+.el-carousel__item:nth-child(2n) {
+  background-color: #99a9bf;
+}
+
+.el-carousel__item:nth-child(2n + 1) {
+  background-color: #d3dce6;
+}

@@ -1,0 +1,151 @@
+<template>
+  <!-- 标题，游戏名字 -->
+  <h2 align="left">{{ obj.name }}</h2>
+  <!--走马灯-->
+  <el-carousel
+    :interval="6000"
+    arrow="always"
+    trigger="click"
+    :height="carouselHeight + 'px'"
+  >
+    <el-carousel-item v-for="item in obj.imgs" :key="item">
+      <el-image class="affix-container" :src="item">
+        <template #error>
+          <div class="image-slot">
+            <i class="el-icon-picture-outline"></i>
+          </div>
+        </template>
+      </el-image>
+    </el-carousel-item>
+  </el-carousel>
+
+  <p />
+
+  <el-space wrap>
+    <!-- 一条竖线 -->
+    <table class="vertical-line">
+      <tr>
+        <td valign="top"></td>
+      </tr>
+    </table>
+
+    <font size="2">游戏类型</font>
+    
+    <el-space wrap>
+      <!-- <div> -->
+      <el-link type="primary">RPG</el-link>
+      <el-link type="success">STG</el-link>
+      <el-link type="warning">RPG</el-link>
+      <el-link type="danger">RPG</el-link>
+      <el-link type="info">RPG</el-link>
+      <!-- </div> -->
+    </el-space>
+  </el-space>
+
+  <div>
+    <h3>
+      {{ obj.description }}
+    </h3>
+  </div>
+</template>
+
+<script>
+import * as GameAPI from "@/api/game/game";
+
+export default {
+  name: "GameExhibitComponent",
+  props: {
+    // 游戏ID
+    "id": {
+      type: Number,
+      required: true,
+    },
+    // 组件宽度
+    "width": String,
+  },
+  data() {
+    return {
+      obj: {
+        name: "",
+        description: "",
+        tags: [],
+        imgs: [],
+      },
+      carouselHeight: 100, // 走马灯高度
+    };
+  },
+  created() {
+    this.carouselHeight = ((this.getWidth() * 9) / 16).toFixed(0);
+  },
+  beforeMount() {
+    this.getGame(this.getId());
+  },
+  methods: {
+    // 获取游戏ID
+    getId() {
+      return this.$props.id;
+    },
+    // 获取整体组件宽度
+    getWidth() {
+      if (this.$props.width == null) {
+        return 1440;
+      }
+      return this.$props.width.substr(0, this.$props.width.length - 2);
+    },
+    // 获取游戏数据
+    getGame(id) {
+      if (id == null) {
+        id = 2;
+      }
+      GameAPI.getGame(id).then((res) => {
+        this.obj = res;
+      });
+    },
+  },
+};
+</script>
+
+<style>
+.el-carousel__item h3 {
+  color: #475669;
+  font-size: 18px;
+  opacity: 0.75;
+  line-height: 300px;
+  margin: 0;
+  text-align: center;
+}
+
+.el-carousel__item:nth-child(2n) {
+  background-color: #99a9bf;
+}
+
+.el-carousel__item:nth-child(2n + 1) {
+  background-color: #d3dce6;
+}
+
+.div-left {
+  width: 300px;
+  height: 120px;
+  border: 1px solid #000;
+  float: left;
+}
+
+.affix-container {
+  height: 100%;
+  width: 100%;
+}
+
+.vertical-line {
+  height: 80px;
+  border-color: #cbd0d8;
+  border-left-style: solid;
+  border-width: 1px;
+}
+
+.text-des {
+  line-height: 25px;
+  text-align: left;
+  height: 30%;
+  width: 100%;
+}
+</style>
