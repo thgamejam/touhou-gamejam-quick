@@ -105,13 +105,6 @@ export default {
 </script>
 
 <style>
-.el-icon-close {
-  color: red;
-}
-.el-icon-check {
-  color: green;
-}
-
 .main {
   width: 100%;
   height: 700px;

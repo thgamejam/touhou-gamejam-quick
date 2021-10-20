@@ -3,6 +3,7 @@ import Home from '../App.vue'
 import Game from "@/views/page/Game.vue";
 import Test from '@/views/component/GameExhibit.vue'
 import Test2 from '@/views/component/AuthorInfo.vue'
+import Test3 from '@/views/component/GameDownload.vue'
 
 const routes = [
   {
@@ -21,6 +22,10 @@ const routes = [
   {
     path: '/test2',
     component: Test2
+  },
+  {
+    path: '/test3',
+    component: Test3
   }
 ]
 
