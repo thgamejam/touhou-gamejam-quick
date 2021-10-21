@@ -1,10 +1,10 @@
 <template>
-  <el-header :style="'width:'+width+'px'">
+  <el-header :style="'width:' + width + 'px'">
     {{ $route.params.id }}
   </el-header>
-  <el-container :style="'width:'+width+'px'">
+  <el-container :style="'width:' + width + 'px'">
     <el-main>
-      <GameExhibitComponent :id="$route.params.id" width="100" />
+      <GameExhibitComponent :id="$route.params.id" :width="mainWidth + 'px'" />
     </el-main>
     <el-aside width="300px">
       <div class="affix-container">
