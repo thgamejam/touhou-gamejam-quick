@@ -965,13 +965,13 @@ var file_api_game_v1_game_proto_depIdxs = []int32{
 	4,  // 5: touhou.api.game.v1.Game.DeleteGame:input_type -> touhou.api.game.v1.DeleteGameRequest
 	6,  // 6: touhou.api.game.v1.Game.GetGame:input_type -> touhou.api.game.v1.GetGameRequest
 	8,  // 7: touhou.api.game.v1.Game.GetGameDownload:input_type -> touhou.api.game.v1.GetGameDownloadRequest
-	10, // 8: touhou.api.game.v1.Game.ListGame:input_type -> touhou.api.game.v1.ListGameRequest
+	10, // 8: touhou.api.game.v1.Game.GetGames:input_type -> touhou.api.game.v1.ListGameRequest
 	1,  // 9: touhou.api.game.v1.Game.CreateGame:output_type -> touhou.api.game.v1.CreateGameReply
 	3,  // 10: touhou.api.game.v1.Game.UpdateGame:output_type -> touhou.api.game.v1.UpdateGameReply
 	5,  // 11: touhou.api.game.v1.Game.DeleteGame:output_type -> touhou.api.game.v1.DeleteGameReply
 	7,  // 12: touhou.api.game.v1.Game.GetGame:output_type -> touhou.api.game.v1.GetGameReply
 	9,  // 13: touhou.api.game.v1.Game.GetGameDownload:output_type -> touhou.api.game.v1.GetGameDownloadReply
-	11, // 14: touhou.api.game.v1.Game.ListGame:output_type -> touhou.api.game.v1.ListGameReply
+	11, // 14: touhou.api.game.v1.Game.GetGames:output_type -> touhou.api.game.v1.ListGameReply
 	9,  // [9:15] is the sub-list for method output_type
 	3,  // [3:9] is the sub-list for method input_type
 	3,  // [3:3] is the sub-list for extension type_name

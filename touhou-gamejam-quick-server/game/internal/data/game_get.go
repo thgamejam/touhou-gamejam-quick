@@ -7,7 +7,7 @@ import (
     "github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
-const keyHead = "game_imgs/"
+const imgKeyHead = "game_imgs/"
 
 func (r *gameRepo) GetGame(ctx context.Context, id uint) (*biz.Game, error) {
     model := &biz.Game{}
@@ -25,7 +25,7 @@ func (r *gameRepo) GameTags(ctx context.Context, id uint) ([]string, error) {
     if err != nil {
         return nil, err
     }
-    tagIdArray  := make([]uint, 0, len(gameExistTagsModels))
+    tagIdArray := make([]uint, 0, len(gameExistTagsModels))
     for _, gameModel := range gameExistTagsModels {
         tagIdArray = append(tagIdArray, gameModel.TagsID)
     }
@@ -62,8 +62,9 @@ func (r *gameRepo) GameImgs(ctx context.Context, id uint) ([]string, error) {
     imgURLArray := make([]string, 0, len(imgIdArray))
     for _, imgId := range imgIdArray {
         getInput := &s3.GetObjectInput{
-            Bucket: r.data.ObjectStorage.bucket,
-            Key:    aws.String(keyHead + imgId), // TODO 这里用了常量，后期需要修改为配置文件
+            Bucket:                     r.data.ObjectStorage.bucket,
+            Key:                        aws.String(imgKeyHead + imgId), // TODO 这里用了常量 imgKeyHead ，需要修改为配置文件
+            //ResponseContentDisposition: aws.String("attachment;filename=" + imgId + ".jpg"),
         }
         req, err := psClient.PresignGetObject(context.TODO(), getInput,
             func(options *s3.PresignOptions) {
@@ -77,4 +78,41 @@ func (r *gameRepo) GameImgs(ctx context.Context, id uint) ([]string, error) {
     }
 
     return imgURLArray, nil
+}
+
+func (r *gameRepo) GameImg(ctx context.Context, id uint) (string, error) {
+    // 获取第一张图片作为预览图
+    gameExistImgModel := &biz.GameExistImgs{}
+    err := r.data.DataBase.Where("game_id = ?", id).First(&gameExistImgModel).Error
+    if err != nil {
+        return "", err
+    }
+
+    // 获取url
+    psClient := s3.NewPresignClient(r.data.ObjectStorage.Client)
+    getInput := &s3.GetObjectInput{
+        Bucket: r.data.ObjectStorage.bucket,
+        Key:    aws.String(imgKeyHead + gameExistImgModel.ImgID.String()), // TODO 这里用了常量 imgKeyHead ，需要修改为配置文件
+    }
+    req, err := psClient.PresignGetObject(context.TODO(), getInput,
+        func(options *s3.PresignOptions) {
+            options.Expires = r.data.ObjectStorage.smallFileExpirationTime
+        },
+    )
+    if err != nil {
+        return "", err
+    }
+
+    return req.URL, nil
+}
+
+func (r *gameRepo) GetGames(ctx context.Context) ([]biz.Game, error) {
+    var models []biz.Game
+
+    err := r.data.DataBase.Find(&models).Error
+    if err != nil {
+        return nil, err
+    }
+
+    return models, nil
 }

@@ -50,7 +50,13 @@ type GameRepo interface {
     // GameImgs 通过id获取游戏图片url
     GameImgs(ctx context.Context, id uint) ([]string, error)
 
+    GameImg(ctx context.Context, id uint) (string, error)
+
     CreateGame(ctx context.Context, name string, authorId uint, des string, dowId uuid.BinaryUUID) (*Game, error)
+
+    GetGames(ctx context.Context) ([]Game, error)
+
+    GetGameDownloadURL(ctx context.Context, uuid uuid.BinaryUUID) (string, error)
 }
 
 type GameUseCase struct {
@@ -74,7 +80,19 @@ func (uc *GameUseCase) GameImgs(ctx context.Context, id uint) ([]string, error) 
     return uc.repo.GameImgs(ctx, id)
 }
 
+func (uc *GameUseCase) GameImg(ctx context.Context, id uint) (string, error) {
+    return uc.repo.GameImg(ctx, id)
+}
+
 func (uc *GameUseCase) CreateGame(ctx context.Context,
     name string, authorId uint, des string, dowId uuid.BinaryUUID) (*Game, error) {
     return uc.repo.CreateGame(ctx, name, authorId, des, dowId)
+}
+
+func (uc *GameUseCase) GetGames(ctx context.Context) ([]Game, error) {
+    return uc.repo.GetGames(ctx)
+}
+
+func (uc *GameUseCase) GetGameDownloadURL(ctx context.Context, uuid uuid.BinaryUUID) (string, error) {
+    return uc.repo.GetGameDownloadURL(ctx, uuid)
 }

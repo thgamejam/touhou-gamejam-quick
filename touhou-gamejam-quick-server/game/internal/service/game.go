@@ -68,8 +68,44 @@ func (s *GameService) GetGame(ctx context.Context, req *pb.GetGameRequest) (*pb.
     }, nil
 }
 func (s *GameService) GetGameDownload(ctx context.Context, req *pb.GetGameDownloadRequest) (*pb.GetGameDownloadReply, error) {
-    return &pb.GetGameDownloadReply{}, nil
+    id := uint(req.GetId())
+    model, err := s.uc.GetGame(ctx, id)
+    if err != nil {
+        return nil, pb.ErrorGameNotFound("game not found: %v", id)
+    }
+
+    url, err := s.uc.GetGameDownloadURL(ctx, model.DownloadID)
+    if err != nil {
+        return nil, pb.ErrorGameNotFound("game download id not found: %v", model.DownloadID.String())
+    }
+
+    return &pb.GetGameDownloadReply{
+        Url: url,
+    }, nil
 }
 func (s *GameService) ListGame(ctx context.Context, req *pb.ListGameRequest) (*pb.ListGameReply, error) {
-    return &pb.ListGameReply{}, nil
+    gameModels, err := s.uc.GetGames(ctx)
+    if err != nil {
+        return nil, pb.ErrorGameNotFound("game not found")
+    }
+
+    // 获取简介图片url
+    urls := make([]*pb.ListGameReply_GameCard, 0, len(gameModels))
+    for _, models := range gameModels {
+        url, err := s.uc.GameImg(ctx, models.ID)
+        if err != nil {
+            continue
+        }
+        urls = append(urls,
+            &pb.ListGameReply_GameCard{
+                Id: uint32(models.ID),
+                Name: models.Name,
+                Img: url,
+            },
+        )
+    }
+
+    return &pb.ListGameReply{
+        List: urls,
+    }, nil
 }

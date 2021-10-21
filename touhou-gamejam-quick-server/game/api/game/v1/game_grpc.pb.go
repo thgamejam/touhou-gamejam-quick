@@ -81,7 +81,7 @@ func (c *gameClient) GetGameDownload(ctx context.Context, in *GetGameDownloadReq
 
 func (c *gameClient) ListGame(ctx context.Context, in *ListGameRequest, opts ...grpc.CallOption) (*ListGameReply, error) {
 	out := new(ListGameReply)
-	err := c.cc.Invoke(ctx, "/touhou.api.game.v1.Game/ListGame", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/touhou.api.game.v1.Game/GetGames", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -121,7 +121,7 @@ func (UnimplementedGameServer) GetGameDownload(context.Context, *GetGameDownload
 	return nil, status.Errorf(codes.Unimplemented, "method GetGameDownload not implemented")
 }
 func (UnimplementedGameServer) ListGame(context.Context, *ListGameRequest) (*ListGameReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListGame not implemented")
+	return nil, status.Errorf(codes.Unimplemented, "method GetGames not implemented")
 }
 func (UnimplementedGameServer) mustEmbedUnimplementedGameServer() {}
 
@@ -236,7 +236,7 @@ func _Game_ListGame_Handler(srv interface{}, ctx context.Context, dec func(inter
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/touhou.api.game.v1.Game/ListGame",
+		FullMethod: "/touhou.api.game.v1.Game/GetGames",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GameServer).ListGame(ctx, req.(*ListGameRequest))
@@ -272,7 +272,7 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Game_GetGameDownload_Handler,
 		},
 		{
-			MethodName: "ListGame",
+			MethodName: "GetGames",
 			Handler:    _Game_ListGame_Handler,
 		},
 	},

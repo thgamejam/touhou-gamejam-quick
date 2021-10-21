@@ -152,7 +152,7 @@ func _Game_ListGame0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) err
 		if err := ctx.BindVars(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/touhou.api.game.v1.Game/ListGame")
+		http.SetOperation(ctx, "/touhou.api.game.v1.Game/GetGames")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.ListGame(ctx, req.(*ListGameRequest))
 		})
@@ -238,7 +238,7 @@ func (c *GameHTTPClientImpl) ListGame(ctx context.Context, in *ListGameRequest, 
 	var out ListGameReply
 	pattern := "/api/v1/game/list/{page}"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/touhou.api.game.v1.Game/ListGame"))
+	opts = append(opts, http.Operation("/touhou.api.game.v1.Game/GetGames"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
