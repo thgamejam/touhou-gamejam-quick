@@ -1,10 +1,10 @@
 <template>
-  <el-header style=":width= mainWidth ">
+  <el-header style=":width= mainWidth+'px' ">
     {{ $route.params.id }}
   </el-header>
   <el-container>
     <el-main>
-      <GameExhibitComponent :id="$route.params.id" width="600px" />
+      <GameExhibitComponent :id="$route.params.id" :width="mainWidth-300+'px'" />
     </el-main>
     <el-aside width="300px">
       <div class="affix-container">
@@ -50,12 +50,11 @@ export default {
         name: "舍僻阁",
         img: "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F96cc3eaca8df7cce99cd3b5a22843206dc522ec2.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1637070918&t=e9d5d7a77aca295eecd2b43a9543be7a",
       },
-      mainWidth:"800px",
+      mainWidth:800,
     };
   },
   created() {
-    this.mainWidth=window.innerWidth<800?800:window.innerWidth+"px";
-    console.log(this.mainWidth);
+    this.mainWidth=window.innerWidth<800?800:window.innerWidth;
   },
   beforeMount() {
     this.getGame();

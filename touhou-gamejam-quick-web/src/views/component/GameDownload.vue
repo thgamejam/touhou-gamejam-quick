@@ -52,6 +52,5 @@ export default {};
 .aside-card {
   text-align: left;
   width: 100%;
-  /* margin: 0 10%; */
 }
 </style>

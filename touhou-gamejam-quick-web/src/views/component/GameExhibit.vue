@@ -80,8 +80,10 @@ export default {
     // 获取整体组件宽度
     getWidth() {
       if (this.$props.width == null) {
+        console.log(this.$props.width);
         return 1440;
       }
+      console.log(this.$props.width);
       return this.$props.width.substr(0, this.$props.width.length - 2);
     },
     // 获取游戏数据
