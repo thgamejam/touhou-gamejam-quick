@@ -46,6 +46,7 @@ func DBAutoMigrate(db *gorm.DB) error {
         &biz.GameTags{},
         &biz.GameExistTags{},
         &biz.GameExistImgs{},
+        &biz.User{},
     )
     if err != nil {
         return err

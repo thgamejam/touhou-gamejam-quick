@@ -22,6 +22,7 @@ func NewGameRepo(data *Data, logger log.Logger) biz.GameRepo {
 
 func (r *gameRepo) CreateGame(ctx context.Context,
     name string, authorId uint, des string, dowId uuid.BinaryUUID) (*biz.Game, error) {
+    
     model := &biz.Game{
         Name: name,
         AuthorID: authorId,

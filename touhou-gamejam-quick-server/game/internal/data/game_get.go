@@ -66,7 +66,7 @@ func (r *gameRepo) GameImgs(ctx context.Context, id uint) ([]string, error) {
             Key:                        aws.String(imgKeyHead + imgId), // TODO 这里用了常量 imgKeyHead ，需要修改为配置文件
             //ResponseContentDisposition: aws.String("attachment;filename=" + imgId + ".jpg"),
         }
-        req, err := psClient.PresignGetObject(context.TODO(), getInput,
+        req, err := psClient.PresignGetObject(ctx, getInput,
             func(options *s3.PresignOptions) {
                 options.Expires = r.data.ObjectStorage.smallFileExpirationTime
             },
@@ -94,7 +94,7 @@ func (r *gameRepo) GameImg(ctx context.Context, id uint) (string, error) {
         Bucket: r.data.ObjectStorage.bucket,
         Key:    aws.String(imgKeyHead + gameExistImgModel.ImgID.String()), // TODO 这里用了常量 imgKeyHead ，需要修改为配置文件
     }
-    req, err := psClient.PresignGetObject(context.TODO(), getInput,
+    req, err := psClient.PresignGetObject(ctx, getInput,
         func(options *s3.PresignOptions) {
             options.Expires = r.data.ObjectStorage.smallFileExpirationTime
         },

@@ -2,6 +2,7 @@ package server
 
 import (
     gameV1 "game/api/game/v1"
+    userV1 "game/api/user/v1"
     "game/internal/conf"
     "game/internal/service"
     "github.com/go-kratos/kratos/v2/log"
@@ -10,7 +11,9 @@ import (
 )
 
 // NewHTTPServer new a HTTP server.
-func NewHTTPServer(c *conf.Server, gameService *service.GameService, logger log.Logger) *http.Server {
+func NewHTTPServer(c *conf.Server,
+    gameService *service.GameService, userService *service.UserService, logger log.Logger) *http.Server {
+    
     var opts = []http.ServerOption{
         http.Middleware(
             recovery.Recovery(),
@@ -27,6 +30,7 @@ func NewHTTPServer(c *conf.Server, gameService *service.GameService, logger log.
     }
     srv := http.NewServer(opts...)
     gameV1.RegisterGameHTTPServer(srv, gameService)
-
+    userV1.RegisterUserHTTPServer(srv, userService)
+    
     return srv
 }

@@ -39,8 +39,11 @@ func initApp(confServer *conf.Server, confData *conf.Data, logger log.Logger) (*
 	gameRepo := data.NewGameRepo(dataData, logger)
 	gameUseCase := biz.NewGameUseCase(gameRepo, logger)
 	gameService := service.NewGameService(gameUseCase, logger)
-	httpServer := server.NewHTTPServer(confServer, gameService, logger)
-	grpcServer := server.NewGRPCServer(confServer, gameService, logger)
+	userRepo := data.NewUseRepo(dataData, logger)
+	userUseCase := biz.NewUserUseCase(userRepo, logger)
+	userService := service.NewUserService(userUseCase, logger)
+	httpServer := server.NewHTTPServer(confServer, gameService, userService, logger)
+	grpcServer := server.NewGRPCServer(confServer, gameService, userService, logger)
 	app := newApp(logger, httpServer, grpcServer)
 	return app, func() {
 		cleanup()

@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package api.user.v1;
+import "google/api/annotations.proto";
+option go_package = "game/api/user/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.user.v1";
+
+service User {
+  rpc CreateUser (CreateUserRequest) returns (CreateUserReply){
+    option(google.api.http) = {
+      put:"/api/v1/user"
+      body:"body"
+    };
+  };
+  rpc UpdateUser (UpdateUserRequest) returns (UpdateUserReply);
+  rpc DeleteUser (DeleteUserRequest) returns (DeleteUserReply);
+  rpc GetUser (GetUserRequest) returns (GetUserReply){
+    option (google.api.http).get = "/api/vi/user/{id}";
+  };
+  rpc ListUser (ListUserRequest) returns (ListUserReply);
+}
+
+message CreateUserRequest {
+  message CreatBody{
+    string name = 1;
+    string Description = 2;
+  }
+  CreatBody body = 1;
+}
+message CreateUserReply {
+  uint32 id = 1;
+}
+
+message UpdateUserRequest {}
+message UpdateUserReply {}
+
+message DeleteUserRequest {}
+message DeleteUserReply {}
+
+message GetUserRequest {
+  uint32 id = 1;
+}
+message GetUserReply {
+  string name = 1;
+  string img = 2;
+}
+
+message ListUserRequest {}
+message ListUserReply {}
