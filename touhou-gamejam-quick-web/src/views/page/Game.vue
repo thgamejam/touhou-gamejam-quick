@@ -1,6 +1,6 @@
 <template>
   <el-header :style="'width:' + width + 'px'">
-    {{ $route.params.id }}
+<!--    {{ $route.params.id }}-->
   </el-header>
   <el-container :style="'width:' + width + 'px'">
     <el-main>
@@ -49,8 +49,8 @@ export default {
   methods: {
     adaptive() {
       const lowestWidth = 800;
-      this.width = (window.innerWidth * 0.8).toFixed(0);
-      this.width = window.innerWidth < lowestWidth / 0.8 ? 800 : this.width;
+      this.width = (window.innerWidth * 0.7).toFixed(0);
+      this.width = window.innerWidth < lowestWidth / 0.7 ? 800 : this.width;
       this.mainWidth = this.width - 300;
       console.log("width: " + this.width);
       console.log("mainWidth: " + this.mainWidth);
