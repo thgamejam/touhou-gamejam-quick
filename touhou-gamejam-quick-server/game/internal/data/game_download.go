@@ -9,7 +9,7 @@ import (
 
 const zipKeyHead = "game/"
 
-func (r *gameRepo) GetGameDownloadURL(ctx context.Context, uuid uuid.BinaryUUID) (string, error) {
+func (r *gameRepo) GetGameDownloadURL(ctx context.Context, uuid uuid.BinaryUUID, name string) (string, error) {
     zipName := uuid.String()
 
     // 获取url
@@ -18,7 +18,7 @@ func (r *gameRepo) GetGameDownloadURL(ctx context.Context, uuid uuid.BinaryUUID)
         Bucket:                     r.data.ObjectStorage.bucket,
         Key:                        aws.String(zipKeyHead + zipName), // TODO 这里用了常量 zipKeyHead ，需要修改为配置文件
         ResponseContentType:        aws.String("application/octet-stream"),
-        ResponseContentDisposition: aws.String("attachment;filename=" + zipName + ".zip"),
+        ResponseContentDisposition: aws.String("attachment;filename=" + name + ".zip"),
     }
     req, err := psClient.PresignGetObject(context.TODO(), getInput,
         func(options *s3.PresignOptions) {

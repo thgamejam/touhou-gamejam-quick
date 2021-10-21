@@ -56,7 +56,7 @@ type GameRepo interface {
 
     GetGames(ctx context.Context) ([]Game, error)
 
-    GetGameDownloadURL(ctx context.Context, uuid uuid.BinaryUUID) (string, error)
+    GetGameDownloadURL(ctx context.Context, uuid uuid.BinaryUUID, name string) (string, error)
 }
 
 type GameUseCase struct {
@@ -93,6 +93,6 @@ func (uc *GameUseCase) GetGames(ctx context.Context) ([]Game, error) {
     return uc.repo.GetGames(ctx)
 }
 
-func (uc *GameUseCase) GetGameDownloadURL(ctx context.Context, uuid uuid.BinaryUUID) (string, error) {
-    return uc.repo.GetGameDownloadURL(ctx, uuid)
+func (uc *GameUseCase) GetGameDownloadURL(ctx context.Context, uuid uuid.BinaryUUID, name string) (string, error) {
+    return uc.repo.GetGameDownloadURL(ctx, uuid, name)
 }

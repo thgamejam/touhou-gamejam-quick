@@ -74,7 +74,7 @@ func (s *GameService) GetGameDownload(ctx context.Context, req *pb.GetGameDownlo
         return nil, pb.ErrorGameNotFound("game not found: %v", id)
     }
 
-    url, err := s.uc.GetGameDownloadURL(ctx, model.DownloadID)
+    url, err := s.uc.GetGameDownloadURL(ctx, model.DownloadID, model.Name)
     if err != nil {
         return nil, pb.ErrorGameNotFound("game download id not found: %v", model.DownloadID.String())
     }
