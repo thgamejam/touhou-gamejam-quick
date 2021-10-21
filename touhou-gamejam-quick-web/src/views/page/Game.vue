@@ -1,10 +1,10 @@
 <template>
-  <el-header style=":width=mainwidth+'px' ">
+  <el-header :style="'width:'+width+'px'">
     {{ $route.params.id }}
   </el-header>
-  <el-container style=":width=mainwidth+'px' ">
+  <el-container :style="'width:'+width+'px'">
     <el-main>
-      <GameExhibitComponent :id="$route.params.id" :width="mainWidth + 'px'" />
+      <GameExhibitComponent :id="$route.params.id" width="100" />
     </el-main>
     <el-aside width="300px">
       <div class="affix-container">
@@ -67,7 +67,7 @@ export default {
 <style>
 .el-container {
   margin: 0 auto;
-  width: 80%;
+  /*width: 80%;*/
 }
 .el-header {
   background-color: #b3c0d1;
@@ -75,7 +75,7 @@ export default {
   text-align: center;
   line-height: 60px;
   margin: 0 auto;
-  width: 80%;
+  /*width: 80%;*/
 }
 .el-aside {
   background-color: #d3dce6;
