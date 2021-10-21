@@ -21,6 +21,7 @@ type GameHTTPServer interface {
 	CreateGame(context.Context, *CreateGameRequest) (*CreateGameReply, error)
 	DeleteGame(context.Context, *DeleteGameRequest) (*DeleteGameReply, error)
 	GetGame(context.Context, *GetGameRequest) (*GetGameReply, error)
+	GetGameDownload(context.Context, *GetGameDownloadRequest) (*GetGameDownloadReply, error)
 	ListGame(context.Context, *ListGameRequest) (*ListGameReply, error)
 	UpdateGame(context.Context, *UpdateGameRequest) (*UpdateGameReply, error)
 }
@@ -31,6 +32,7 @@ func RegisterGameHTTPServer(s *http.Server, srv GameHTTPServer) {
 	r.PUT("/api/v1/game/{id}", _Game_UpdateGame0_HTTP_Handler(srv))
 	r.DELETE("/api/v1/game/{id}", _Game_DeleteGame0_HTTP_Handler(srv))
 	r.GET("/api/v1/game/{id}", _Game_GetGame0_HTTP_Handler(srv))
+	r.GET("/api/v1/game/download/{id}", _Game_GetGameDownload0_HTTP_Handler(srv))
 	r.GET("/api/v1/game/list/{page}", _Game_ListGame0_HTTP_Handler(srv))
 }
 
@@ -119,6 +121,28 @@ func _Game_GetGame0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) erro
 	}
 }
 
+func _Game_GetGameDownload0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetGameDownloadRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, "/touhou.api.game.v1.Game/GetGameDownload")
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetGameDownload(ctx, req.(*GetGameDownloadRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetGameDownloadReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _Game_ListGame0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListGameRequest
@@ -145,6 +169,7 @@ type GameHTTPClient interface {
 	CreateGame(ctx context.Context, req *CreateGameRequest, opts ...http.CallOption) (rsp *CreateGameReply, err error)
 	DeleteGame(ctx context.Context, req *DeleteGameRequest, opts ...http.CallOption) (rsp *DeleteGameReply, err error)
 	GetGame(ctx context.Context, req *GetGameRequest, opts ...http.CallOption) (rsp *GetGameReply, err error)
+	GetGameDownload(ctx context.Context, req *GetGameDownloadRequest, opts ...http.CallOption) (rsp *GetGameDownloadReply, err error)
 	ListGame(ctx context.Context, req *ListGameRequest, opts ...http.CallOption) (rsp *ListGameReply, err error)
 	UpdateGame(ctx context.Context, req *UpdateGameRequest, opts ...http.CallOption) (rsp *UpdateGameReply, err error)
 }
@@ -188,6 +213,19 @@ func (c *GameHTTPClientImpl) GetGame(ctx context.Context, in *GetGameRequest, op
 	pattern := "/api/v1/game/{id}"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation("/touhou.api.game.v1.Game/GetGame"))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *GameHTTPClientImpl) GetGameDownload(ctx context.Context, in *GetGameDownloadRequest, opts ...http.CallOption) (*GetGameDownloadReply, error) {
+	var out GetGameDownloadReply
+	pattern := "/api/v1/game/download/{id}"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation("/touhou.api.game.v1.Game/GetGameDownload"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {

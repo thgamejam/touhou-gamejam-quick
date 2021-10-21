@@ -36,8 +36,6 @@ func NewDataBase(c *conf.Data, logger log.Logger) (*gorm.DB, error) {
         return nil, err
     }
 
-
-
     return db, nil
 }
 

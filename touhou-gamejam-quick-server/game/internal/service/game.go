@@ -63,10 +63,12 @@ func (s *GameService) GetGame(ctx context.Context, req *pb.GetGameRequest) (*pb.
         Name:        gameModel.Name,
         AuthorId:    uint32(gameModel.AuthorID),
         Description: gameModel.Description,
-        DownloadId:  gameModel.DownloadID.String(),
         Tags:        tags,
         Imgs:        imgs,
     }, nil
+}
+func (s *GameService) GetGameDownload(ctx context.Context, req *pb.GetGameDownloadRequest) (*pb.GetGameDownloadReply, error) {
+    return &pb.GetGameDownloadReply{}, nil
 }
 func (s *GameService) ListGame(ctx context.Context, req *pb.ListGameRequest) (*pb.ListGameReply, error) {
     return &pb.ListGameReply{}, nil

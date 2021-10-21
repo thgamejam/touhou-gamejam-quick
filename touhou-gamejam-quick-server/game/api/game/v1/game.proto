@@ -31,6 +31,10 @@ service Game {
     option (google.api.http).get = "/api/v1/game/{id}";
   }
 
+  rpc GetGameDownload (GetGameDownloadRequest) returns (GetGameDownloadReply) {
+    option (google.api.http).get = "/api/v1/game/download/{id}";
+  }
+
   rpc ListGame (ListGameRequest) returns (ListGameReply) {
     option (google.api.http).get = "/api/v1/game/list/{page}";
   }
@@ -41,8 +45,6 @@ message CreateGameRequest {
     string name = 1;
     uint32 author_id = 2;     // 作者id
     string description = 3;   // 简介
-//    repeated string tags = 4; // 标签
-//    repeated string imgs = 5; // 图片集的url
   }
   CreateBody body = 1;
 }
@@ -56,9 +58,6 @@ message UpdateGameRequest {
     string name = 1;
     uint32 author_id = 2;     // 作者id
     string description = 3;   // 简介
-    string download_id = 4;   // 下载文件uuid
-    repeated string tags = 5; // 标签
-    repeated string imgs = 6; // 图片集的url
   }
   uint32 id = 1;
   UpdateBody body = 2;
@@ -77,9 +76,15 @@ message GetGameReply {
   string name = 1;
   uint32 author_id = 2;    // 作者id
   string description = 3;  // 简介
-  string download_id = 4;    // 下载文件uuid
   repeated string tags = 5; // 标签
   repeated string imgs = 6; // 图片集的url
+}
+
+message GetGameDownloadRequest{
+  uint32 id = 1;
+}
+message GetGameDownloadReply{
+  string url = 1; // 下载文件url
 }
 
 message ListGameRequest {
