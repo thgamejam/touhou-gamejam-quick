@@ -28,9 +28,9 @@
       </tr>
     </table>
     <font size="2"></font>
-    <div style="margin: 0 18px">标签</div>
+    <div style="margin: 0 18px">游戏类型</div>
     <div class="tag-box" v-for="tag in obj.tags" :key="tag">
-      <el-tag style="margin: 10px">{{tag}}</el-tag>
+      <el-tag style="margin: 10px">{{ tag }}</el-tag>
     </div>
   </div>
 
@@ -48,19 +48,19 @@ export default {
   name: "GameExhibitComponent",
   props: {
     // 游戏ID
-    "id": {
+    id: {
       type: Number,
       required: true,
     },
     // 组件宽度
-    "width": String,
+    width: String,
   },
   data() {
     return {
       obj: {
         name: "",
         description: "",
-        tags: ["冒险","动作","东方"],
+        tags: ["冒险", "动作", "东方"],
         imgs: [],
       },
       carouselHeight: 100, // 走马灯高度
@@ -68,6 +68,7 @@ export default {
   },
   created() {
     this.carouselHeight = ((this.getWidth() * 9) / 16).toFixed(0);
+    console.log(this.getWidth() + "*" + this.carouselHeight);
   },
   beforeMount() {
     this.getGame(this.getId());
@@ -100,11 +101,11 @@ export default {
 </script>
 
 <style>
-.tag-text{
+.tag-text {
   width: 100%;
   height: 100px;
 }
-.tag-box{
+.tag-box {
   float: left;
 }
 .el-carousel__item h3 {
