@@ -16,7 +16,7 @@ service User {
   rpc UpdateUser (UpdateUserRequest) returns (UpdateUserReply);
   rpc DeleteUser (DeleteUserRequest) returns (DeleteUserReply);
   rpc GetUser (GetUserRequest) returns (GetUserReply){
-    option (google.api.http).get = "/api/vi/user/{id}";
+    option (google.api.http).get = "/api/v1/user/{id}";
   };
   rpc ListUser (ListUserRequest) returns (ListUserReply);
 }

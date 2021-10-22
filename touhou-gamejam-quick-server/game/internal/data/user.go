@@ -14,6 +14,8 @@ type userRepo struct {
 	log  *log.Helper
 }
 
+const userKeyHead = "user_img"
+
 func NewUseRepo(data *Data, logger log.Logger) biz.UserRepo {
 	return &userRepo{
 		data: data,
@@ -38,7 +40,7 @@ func (u *userRepo) GetImg(ctx context.Context, id uint) (string, error) {
 	psClient := s3.NewPresignClient(u.data.ObjectStorage.Client)
 	getInput := &s3.GetObjectInput{
 		Bucket: u.data.ObjectStorage.bucket,
-		Key:    aws.String(imgKeyHead + model.ImgID.String()),
+		Key:    aws.String(userKeyHead + model.ImgID.String()), // TODO
 	}
 	req, err := psClient.PresignGetObject(ctx, getInput,
 		func(options *s3.PresignOptions) {
