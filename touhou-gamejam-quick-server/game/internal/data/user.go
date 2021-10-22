@@ -14,7 +14,7 @@ type userRepo struct {
 	log  *log.Helper
 }
 
-const userKeyHead = "user_img"
+const userKeyHead = "user_img/"
 
 func NewUseRepo(data *Data, logger log.Logger) biz.UserRepo {
 	return &userRepo{
