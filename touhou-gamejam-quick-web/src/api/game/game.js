@@ -6,8 +6,11 @@ const getGameDownloadURL = id => axios.get(`/api/v1/game/download/${id}`).then(r
 
 const getGameList = page => axios.get(`/api/v1/game/list/${page}`).then(res => res.data);
 
+const getUserImg = id =>axios.get(`/api/v1/user/${id}`).then(res=>res.data)
+
 export {
   getGame,
   getGameDownloadURL,
   getGameList,
+  getUserImg,
 }

@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import * as GameApi from "@/api/game/game";
 export default {
   name: "AuthorInfoComponent",
   props: {
@@ -28,6 +29,17 @@ export default {
         img: "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F96cc3eaca8df7cce99cd3b5a22843206dc522ec2.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1637070918&t=e9d5d7a77aca295eecd2b43a9543be7a",
       },
     };
+  },
+  created() {
+    this.getUser()
+  },
+  methods:{
+    getUser(){
+      GameApi.getUserImg(this.$route.params.id).then((res)=>{
+        this.authorObj=res;
+        console.log("aaaaaaaaaaaaaa")
+      })
+    }
   },
 };
 </script>

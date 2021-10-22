@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import * as GameApi from "@/api/game/game.js"
 export default {
   data(){
     return{
@@ -32,10 +33,16 @@ export default {
   },
   created() {
     this.setHeight();
+    this.getGameList();
   },
   methods:{
     setHeight(){
       this.imgHeight=(window.innerWidth*0.6)/16*9;
+    },
+    getGameList(){
+      GameApi.getGameList(1).then((res)=>{
+        this.gamelist=res.list;
+      })
     }
   },
 }
