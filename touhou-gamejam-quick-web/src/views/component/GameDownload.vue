@@ -32,13 +32,45 @@
 
     <hr />
     
-    <el-button type="primary" style="width: 100%">Download</el-button>
+    <el-button
+        @click="getGameDownloadURL"
+        style="width: 100%"
+        :type="type"
+        :loading="loading"
+    >
+      Download
+    </el-button>
 
   </el-card>
 </template>
 
 <script>
-export default {};
+import * as GameApi from "@/api/game/game";
+export default {
+  data(){
+    return{
+      downloadURL:"",
+      loading:false,
+      type:"primary",
+    };
+  },
+  methods:{
+    getGameDownloadURL(){
+      //修改按钮样式
+      this.loading=true;
+      this.type="danger";
+      //延时请求链接并重置按钮样式
+      setTimeout(()=>{
+        this.loading=false;
+        this.type="primary";
+        GameApi.getGameDownloadURL(this.$route.params.id).then((res)=>{
+          this.downloadURL=res;
+          console.log(this.downloadURL);
+        })
+      },5000)
+    },
+  },
+};
 </script>
 
 <style>
