@@ -64,10 +64,10 @@ export default {
         this.loading=false;
         this.type="primary";
         GameApi.getGameDownloadURL(this.$route.params.id).then((res)=>{
-          this.downloadURL=res;
-          console.log(this.downloadURL);
+          this.downloadURL=res.url;
+          window.open(this.downloadURL)
         })
-      },5000)
+      },3000)
     },
   },
 };
