@@ -34,7 +34,7 @@
     </div>
   </div>
 
-  <div style="float: none">
+  <div style="float: none;white-space: pre-wrap;">
     <h3>
       {{ obj.description }}
     </h3>
