@@ -1,7 +1,7 @@
 <template>
   <div class="body-box">
     <div class="header" :style="'height'+imgHeight+'px'">
-      <img class="gamejam-img" :style="'height'+imgHeight+'px'" src="http://thjam.cc:9000/public-download/logo.jpg">
+      <img class="gamejam-img" :style="'height'+imgHeight+'px'" src="http://thjam.cc:9000/public-download/head.jpg">
     </div>
     <div v-for="item in gamelist" :key="item" class="header"  :style="'height'+imgHeight+'px'">
       <a :href="'/game/'+item.id">
