@@ -12,9 +12,9 @@ type Game struct {
     gorm.Model
 
     Name        string          `gorm:"not null; type:varchar(32)"`
-    AuthorID    uint            `gorm:"index; not null"`             // 作者id
-    Description string          `gorm:"not null; type:varchar(512)"` // 简介
-    DownloadID  uuid.BinaryUUID `gorm:"not null; type:binary(16)"`   // 下载文件uuid
+    AuthorID    uint            `gorm:"index; not null"`                // 作者id
+    Description string          `gorm:"not null; type:varchar(1024)"`   // 简介
+    DownloadID  uuid.BinaryUUID `gorm:"not null; type:binary(16)"`      // 下载文件uuid
 }
 
 // GameTags 游戏标签模型
