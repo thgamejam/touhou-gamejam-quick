@@ -34,6 +34,7 @@ export default {
   created() {
     this.setHeight();
     this.getGameList();
+    console.log(this.gamelist);
   },
   methods:{
     setHeight(){
