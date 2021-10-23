@@ -3,7 +3,8 @@
   <h2 align="left">{{ obj.name }}</h2>
   <!--走马灯-->
   <el-carousel
-    :interval="6000"
+     v-if="update"
+    :interval="3000"
     arrow="always"
     trigger="click"
     :height="carouselHeight + 'px'"
@@ -60,10 +61,11 @@ export default {
       obj: {
         name: "",
         description: "",
-        tags: ["冒险", "动作", "东方"],
+        tags: [],
         imgs: [],
       },
       carouselHeight: 100, // 走马灯高度
+      update: true,
     };
   },
   created() {
@@ -74,6 +76,13 @@ export default {
     this.getGame(this.getId());
   },
   methods: {
+    //强制刷新
+    reload() {
+      this.update = false
+      this.$nextTick(() => {
+        this.update = true
+      })
+    },
     // 获取游戏ID
     getId() {
       return this.$props.id;

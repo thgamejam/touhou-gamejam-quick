@@ -2,7 +2,7 @@
   <el-card class="aside-card" style="width: 80%;margin: 10%">
     <div class="card-header">
       <el-divider>
-        <i class="el-icon-star-on"></i>协议<i class="el-icon-star-on" />
+       协议
       </el-divider>
     </div>
     <el-row>
